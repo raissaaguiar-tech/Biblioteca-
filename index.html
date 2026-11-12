@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca SENAI · Check-in</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Fontes: JetBrains Mono (rótulos técnicos) + Plus Jakarta Sans (leitura) -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Cabeçalho -->
+    <header class="topbar">
+      <div class="marca-grupo">
+        <span class="selo-senai">SENAI</span>
+        <span class="marca-nome">Biblioteca</span>
+        <span class="marca-sub">/ Check-in</span>
+      </div>
+
+      <button type="button" class="btn-tema" id="btn-tema" aria-label="Alternar tema">
+        <svg class="icone-lua" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+        </svg>
+        <svg class="icone-sol" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+        </svg>
+        <span id="texto-tema">Escuro</span>
+      </button>
+    </header>
+
+    <!-- TELA 1: BOAS-VINDAS -->
+    <main id="tela-boas-vindas" class="tela">
+
+      <section class="hero">
+        <span class="kicker">Semana do Livro e da Biblioteca · 2026</span>
+        <h1>Bem-vindo<br>à Biblioteca.</h1>
+        <p class="descricao">
+          Um espaço para leitura, estudo e pesquisa — com mesas para foco individual ou em grupo, e jogos de tabuleiro para os intervalos.
+        </p>
+      </section>
+
+      <section class="bloco-local">
+        <span class="kicker">Ponto de leitura</span>
+        <div class="local-linha">
+          <strong id="texto-mesa-inicio">Área Geral · Biblioteca</strong>
+          <span class="status-aberto"><i></i>Aberto agora</span>
+        </div>
+      </section>
+
+      <section class="bloco-recursos">
+        <span class="kicker">O que oferecemos</span>
+        <ol class="lista-recursos">
+          <li class="recurso">
+            <span class="recurso-num">01</span>
+            <div class="recurso-corpo">
+              <strong>Leitura & acervo</strong>
+              <p>Livros técnicos, literatura e empréstimos.</p>
+            </div>
+          </li>
+          <li class="recurso">
+            <span class="recurso-num">02</span>
+            <div class="recurso-corpo">
+              <strong>Estudo & pesquisa</strong>
+              <p>Mesas para foco individual ou em equipe.</p>
+            </div>
+          </li>
+          <li class="recurso">
+            <span class="recurso-num">03</span>
+            <div class="recurso-corpo">
+              <strong>Jogos & desafios</strong>
+              <p>Tabuleiros, cartas e quebra-cabeças.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <button type="button" class="btn-primario" id="btn-ir-checkin">
+        Iniciar check-in
+        <span class="seta">→</span>
+      </button>
+    </main>
+
+    <!-- TELA 2: FORMULÁRIO -->
+    <main id="tela-formulario" class="tela oculta">
+      <div class="sub-nav">
+        <button type="button" class="btn-voltar" id="btn-voltar">← Voltar</button>
+        <span class="badge-mesa" id="badge-mesa-form">Área Geral</span>
+      </div>
+
+      <section class="intro-compacta">
+        <span class="kicker">Registro de entrada</span>
+        <h2>Confirme sua presença</h2>
+        <p>Preencha os campos abaixo para registrar o check-in neste ponto.</p>
+      </section>
+
+      <form id="form-checkin" class="formulario">
+
+        <div class="campo">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" placeholder="Ex.: Maria Santos Silva" required autocomplete="off">
+        </div>
+
+        <div class="campo">
+          <label for="turma">Turma / curso</label>
+          <select id="turma" required>
+            <option value="" disabled selected>Selecione...</option>
+            <option value="CAI — Auxiliar Administrativo">CAI — Auxiliar Administrativo</option>
+            <option value="CAI — Mecânico de Refrigeração e Ar Condicionado">CAI — Mecânico de Refrigeração e Ar Condicionado</option>
+            <option value="Curso Técnico em Programação de Jogos Digitais">Curso Técnico em Programação de Jogos Digitais</option>
+            <option value="Curso Técnico em Desenvolvimento de Sistemas">Curso Técnico em Desenvolvimento de Sistemas</option>
+            <option value="Curso Técnico em Logística">Curso Técnico em Logística</option>
+            <option value="FIC — Formação Inicial e Continuada">FIC — Formação Inicial e Continuada</option>
+            <option value="Cliente externo / Docente / Ex-aluno / Colaborador / Outros">Cliente externo, docente, ex-aluno, colaborador, outros</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label>Atividade</label>
+          <div class="grid-atividades">
+            <label class="opcao">
+              <input type="radio" name="motivo" value="Leitura" checked>
+              <div class="opcao-box">
+                <strong>Leitura</strong>
+                <span>Livros e revistas</span>
+              </div>
+            </label>
+
+            <label class="opcao">
+              <input type="radio" name="motivo" value="Estudo">
+              <div class="opcao-box">
+                <strong>Estudo</strong>
+                <span>Pesquisa e tarefas</span>
+              </div>
+            </label>
+
+            <label class="opcao">
+              <input type="radio" name="motivo" value="Jogos">
+              <div class="opcao-box">
+                <strong>Jogos</strong>
+                <span>Tabuleiros e quebra&#8209;cabeças</span>
+              </div>
+            </label>
+
+            <label class="opcao">
+              <input type="radio" name="motivo" value="Empréstimo">
+              <div class="opcao-box">
+                <strong>Empréstimo</strong>
+                <span>Retirar ou devolver</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primario">
+          Confirmar check-in
+          <span class="seta">→</span>
+        </button>
+      </form>
+    </main>
+
+    <!-- TELA 3: COMPROVANTE / CHECK-OUT -->
+    <main id="tela-sucesso" class="tela oculta">
+
+      <section class="intro-compacta">
+        <span class="kicker kicker-ok">Check-in registrado</span>
+        <h2>Bom aproveitamento.</h2>
+        <p>Ao terminar suas atividades, registre sua saída abaixo.</p>
+      </section>
+
+      <div class="tabela-resumo">
+        <div class="resumo-linha">
+          <span>Nome</span>
+          <strong id="resumo-nome">—</strong>
+        </div>
+        <div class="resumo-linha">
+          <span>Turma</span>
+          <strong id="resumo-turma">—</strong>
+        </div>
+        <div class="resumo-linha">
+          <span>Local</span>
+          <strong id="resumo-local">—</strong>
+        </div>
+        <div class="resumo-linha">
+          <span>Atividade</span>
+          <strong id="resumo-atividade">—</strong>
+        </div>
+        <div class="resumo-linha">
+          <span>Entrada</span>
+          <strong id="resumo-hora" class="mono">—</strong>
+        </div>
+      </div>
+
+      <button type="button" class="btn-secundario" id="btn-checkout">
+        Encerrar sessão · check-out
+      </button>
+    </main>
+
+    <footer class="rodape">
+      <span>SENAI · Departamento Regional</span>
+      <span class="mono">v 1.2</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
